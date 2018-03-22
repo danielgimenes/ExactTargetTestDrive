@@ -1,0 +1,64 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion 27
+    defaultConfig {
+        applicationId "com.eduk.edukandroidapp"
+        minSdkVersion 15
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        debug {
+            // set these in ~/.gradle/gradle.properties
+            resValue "string", "exact_target_access_token", EXACT_TARGET_ACCESS_TOKEN
+            resValue "string", "exact_target_app_id", EXACT_TARGET_APP_ID
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            // set these in ~/.gradle/gradle.properties
+            resValue "string", "exact_target_access_token", EXACT_TARGET_ACCESS_TOKEN
+            resValue "string", "exact_target_app_id", EXACT_TARGET_APP_ID
+        }
+    }
+}
+
+repositories {
+    maven { url "http://salesforce-marketingcloud.github.io/JB4A-SDK-Android/repository" }
+    google()
+    mavenCentral()
+}
+
+ext {
+    playServicesVersion = "11.8.0"
+    supportLibraryVersion = "27.1.0"
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation"org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "com.android.support:appcompat-v7:$supportLibraryVersion"
+
+    // ExactTarget / Salesforce Marketing Cloud"s MobilePush
+    compile ("com.salesforce.marketingcloud:marketingcloudsdk:5.4.4") {
+        exclude module: "android-beacon-library"
+        exclude module: "play-services-location"
+        exclude group: "com.google.android.gms", module: "play-services-analytics"
+    }
+
+    implementation "com.google.android.gms:play-services-analytics:$playServicesVersion"
+    implementation "com.google.firebase:firebase-core:$playServicesVersion"
+    implementation "com.google.firebase:firebase-config:$playServicesVersion"
+    implementation "com.google.android.gms:play-services-tagmanager:$playServicesVersion"
+}
+
+apply plugin: "com.google.gms.google-services"

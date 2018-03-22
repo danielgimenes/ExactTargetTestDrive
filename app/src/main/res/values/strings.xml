@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">ExactTargetIntegration</string>
+    <string name="course_news_notification_channel_name">news</string>
+</resources>
