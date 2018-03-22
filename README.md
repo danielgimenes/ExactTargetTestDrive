@@ -30,3 +30,9 @@ E/AndroidRuntime: FATAL EXCEPTION: AsyncTask #1
            at java.lang.Thread.run(Thread.java:764)
 
 ```
+
+# Setup
+
+To run this project you must:
+- set EXACT_TARGET_ACCESS_TOKEN and EXACT_TARGET_APP_ID variables in ~/.gradle/gradle.properties with the corresponding info from your Exact Target account
+- create a project at Firebase, add the provided google-services.json to app/ and change the package of the application to the one of your Firebase project.
